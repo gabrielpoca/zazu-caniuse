@@ -1,0 +1,25 @@
+{
+  "name": "zazu-can-i-use",
+  "version": "1.0.0",
+  "description": "Zazu Template opening caniuse.com.",
+  "blocks": {
+    "input": [
+      {
+        "id": "caniuse",
+        "type": "PrefixScript",
+        "prefix": "caniuse",
+        "space": true,
+        "args": "Required",
+        "script": "src/index.js",
+        "connections": ["Open"]
+      }
+    ],
+    "output": [
+      {
+        "id": "Open",
+        "type": "OpenInBrowser",
+        "url": "{value}"
+      }
+    ]
+  }
+}
