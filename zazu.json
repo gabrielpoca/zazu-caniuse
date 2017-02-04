@@ -1,6 +1,6 @@
 {
   "name": "zazu-can-i-use",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "icon.png",
   "description": "Zazu Template opening caniuse.com.",
   "blocks": {

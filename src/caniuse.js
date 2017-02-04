@@ -10,6 +10,7 @@ module.exports.query = (query) => {
       return features.map(feature => ({
         value: searchUrl(feature.slug),
         title: feature.title,
+        subtitle: feature.description,
       }))
     })
 }
