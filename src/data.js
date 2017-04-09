@@ -1,3 +1,4 @@
+const Fuse = require('fuse.js')
 const featuresData = require('caniuse-db/data.json').data
 
 const browsersInTitle = [
@@ -5,7 +6,7 @@ const browsersInTitle = [
   'edge',
   'firefox',
   'chrome',
-  'safari',
+  'safari'
 ]
 
 const browserToKey = {
@@ -13,7 +14,7 @@ const browserToKey = {
   edge: 'EDGE',
   firefox: 'FF',
   chrome: 'CH',
-  safari: 'S',
+  safari: 'S'
 }
 
 const firstBrowserVersionForFeature = (feature, browser) => {
@@ -55,13 +56,22 @@ const features = Object.keys(featuresData)
     return memo
   }, [])
 
+const fuse = new Fuse(features, {
+  shouldSort: true,
+  tokenize: true,
+  threshold: 0.5,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 2,
+  keys: [
+    'title',
+    'description'
+  ]
+})
+
 module.exports.query = query => {
   return new Promise((resolve, reject) => {
-    const match = features.filter(feature => {
-      return (feature.title.indexOf(query)) !== -1 ||
-        (feature.description.indexOf(query) !== -1)
-    })
-
-    return resolve(match)
+    return resolve(fuse.search(query))
   })
 }
